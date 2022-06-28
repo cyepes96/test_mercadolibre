@@ -10,6 +10,12 @@ public class ResponseStatsDTO implements Serializable {
 	private Long countHumanDna;
 	private Double ratio;
 
+	public ResponseStatsDTO(Long countMutantDna, Long countHumanDna, Double ratio) {
+		this.countMutantDna = countMutantDna;
+		this.countHumanDna = countHumanDna;
+		this.ratio = ratio;
+	}
+
 	public Long getCountMutantDna() {
 		return countMutantDna;
 	}
