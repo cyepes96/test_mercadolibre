@@ -1,5 +1,6 @@
 package com.test.mercadolibre.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.test.mercadolibre.dao.StatsDAOImpl;
@@ -13,6 +14,7 @@ import com.test.mercadolibre.util.Utils;
 @Service
 public class MeliService {
 
+	@Autowired
 	private StatsDAOImpl statsDAOImpl;
 
 	public ResponseXmenDTO isMutant(RequestXmenDTO request) {
