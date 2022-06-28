@@ -1,5 +1,6 @@
 package com.test.mercadolibre.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -12,23 +13,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.test.mercadolibre.dto.RequestXmenDTO;
 import com.test.mercadolibre.dto.ResponseErrorDTO;
+import com.test.mercadolibre.dto.ResponseStatsDTO;
+import com.test.mercadolibre.dto.ResponseXmenDTO;
 import com.test.mercadolibre.exception.BusinessLayerException;
+import com.test.mercadolibre.service.MeliService;
 import com.test.mercadolibre.util.ErrorMessages;
 
 @RestController
 @RequestMapping("/xmen")
 public class MeliController {
 
-	@PostMapping(path = "/mutant")
-	public ResponseEntity<Object> isMutant(@RequestBody(required = true) RequestXmenDTO request) {
+	@Autowired
+	private MeliService meliService;
 
-		return ResponseEntity.ok("mutant");
+	@PostMapping(path = "/mutant")
+	public ResponseEntity<ResponseXmenDTO> isMutant(@RequestBody(required = true) RequestXmenDTO request) {
+		ResponseXmenDTO response = meliService.isMutant(request);
+
+		return new ResponseEntity<>(response, (response.isMutant() ? HttpStatus.OK : HttpStatus.FORBIDDEN));
 	}
 
 	@GetMapping(path = "/stats")
-	public ResponseEntity<Object> stats() {
+	public ResponseEntity<ResponseStatsDTO> stats() {
+		ResponseStatsDTO response = meliService.getStats();
 
-		return ResponseEntity.ok("stats");
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	@ExceptionHandler
