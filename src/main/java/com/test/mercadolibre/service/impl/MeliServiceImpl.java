@@ -1,4 +1,4 @@
-package com.test.mercadolibre.service;
+package com.test.mercadolibre.service.impl;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import com.test.mercadolibre.dto.ResponseStatsDTO;
 import com.test.mercadolibre.dto.ResponseXmenDTO;
 import com.test.mercadolibre.entity.StatsEntity;
 import com.test.mercadolibre.exception.BusinessLayerException;
+import com.test.mercadolibre.service.IMeliService;
 import com.test.mercadolibre.util.Constantes;
 import com.test.mercadolibre.util.ErrorMessages;
 import com.test.mercadolibre.util.Utils;

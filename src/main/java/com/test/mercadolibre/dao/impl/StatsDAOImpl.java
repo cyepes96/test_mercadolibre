@@ -1,9 +1,11 @@
-package com.test.mercadolibre.dao;
+package com.test.mercadolibre.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.test.mercadolibre.dao.IStatsDAO;
 import com.test.mercadolibre.entity.StatsEntity;
+import com.test.mercadolibre.repository.StatsRepository;
 
 @Repository
 public class StatsDAOImpl implements IStatsDAO {

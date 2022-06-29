@@ -1,4 +1,4 @@
-package com.test.mercadolibre.dao;
+package com.test.mercadolibre.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
