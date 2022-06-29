@@ -27,7 +27,8 @@ public class MeliController {
 	private MeliService meliService;
 
 	@PostMapping(path = "/mutant")
-	public ResponseEntity<ResponseXmenDTO> isMutant(@RequestBody(required = true) RequestXmenDTO request) {
+	public ResponseEntity<ResponseXmenDTO> isMutant(@RequestBody(required = true) RequestXmenDTO request)
+			throws BusinessLayerException {
 		ResponseXmenDTO response = meliService.isMutant(request);
 
 		return new ResponseEntity<>(response, (response.isMutant() ? HttpStatus.OK : HttpStatus.FORBIDDEN));
