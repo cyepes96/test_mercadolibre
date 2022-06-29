@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.test.mercadolibre.dao.StatsDAOImpl;
+import com.test.mercadolibre.dao.IStatsDAO;
 import com.test.mercadolibre.dto.RequestXmenDTO;
 import com.test.mercadolibre.dto.ResponseStatsDTO;
 import com.test.mercadolibre.dto.ResponseXmenDTO;
@@ -16,21 +16,25 @@ import com.test.mercadolibre.util.ErrorMessages;
 import com.test.mercadolibre.util.Utils;
 
 @Service
-public class MeliService {
+public class MeliServiceImpl implements IMeliService {
 
 	@Autowired
-	private StatsDAOImpl statsDAOImpl;
+	private IStatsDAO statsDAO;
 
+	@Override
 	public ResponseXmenDTO isMutant(RequestXmenDTO request) throws BusinessLayerException {
 		ResponseXmenDTO response = new ResponseXmenDTO();
 
 		this.bussinessValidations(request.getDna());
+		boolean isMutant = this.isMutant(Utils.listIntoMatrix(request.getDna()));
+		this.saveStats(isMutant);
 
 		return response;
 	}
 
+	@Override
 	public ResponseStatsDTO getStats() {
-		StatsEntity stat = statsDAOImpl.findStatById(Constantes.ID_STAT_DEFAULT);
+		StatsEntity stat = statsDAO.findStatById(Constantes.ID_STAT_DEFAULT);
 		return this.fillStatsResponse(stat);
 	}
 
@@ -42,9 +46,32 @@ public class MeliService {
 			Double mutantDna = stat.getCountMutantDna().doubleValue();
 			Double ratio = humanDna / (mutantDna + humanDna);
 
-			return new ResponseStatsDTO(stat.getCountHumanDna(), stat.getCountMutantDna(),
+			return new ResponseStatsDTO(stat.getCountMutantDna(), stat.getCountHumanDna(),
 					Utils.getDoubleWithTwoDecimals(ratio));
 		}
+	}
+
+	private boolean isMutant(String[][] matrix) {
+
+		return true;
+	}
+
+	private void saveStats(boolean isMutant) {
+		StatsEntity stat = statsDAO.findStatById(Constantes.ID_STAT_DEFAULT);
+		if (stat == null) {
+			stat = new StatsEntity();
+			stat.setId(Constantes.ID_STAT_DEFAULT);
+			stat.setCountHumanDna(0L);
+			stat.setCountMutantDna(0L);
+		}
+
+		if (isMutant) {
+			stat.setCountMutantDna(stat.getCountMutantDna() + 1);
+		} else {
+			stat.setCountHumanDna(stat.getCountHumanDna() + 1);
+		}
+
+		statsDAO.saveStat(stat);
 	}
 
 	private void bussinessValidations(List<String> dna) throws BusinessLayerException {

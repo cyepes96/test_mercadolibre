@@ -16,7 +16,7 @@ import com.test.mercadolibre.dto.ResponseErrorDTO;
 import com.test.mercadolibre.dto.ResponseStatsDTO;
 import com.test.mercadolibre.dto.ResponseXmenDTO;
 import com.test.mercadolibre.exception.BusinessLayerException;
-import com.test.mercadolibre.service.MeliService;
+import com.test.mercadolibre.service.IMeliService;
 import com.test.mercadolibre.util.ErrorMessages;
 
 @RestController
@@ -24,7 +24,7 @@ import com.test.mercadolibre.util.ErrorMessages;
 public class MeliController {
 
 	@Autowired
-	private MeliService meliService;
+	private IMeliService meliService;
 
 	@PostMapping(path = "/mutant")
 	public ResponseEntity<ResponseXmenDTO> isMutant(@RequestBody(required = true) RequestXmenDTO request)
