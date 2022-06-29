@@ -8,6 +8,10 @@ public class ResponseXmenDTO implements Serializable {
 
 	private boolean mutant;
 
+	public ResponseXmenDTO(boolean mutant) {
+		this.mutant = mutant;
+	}
+
 	public boolean isMutant() {
 		return mutant;
 	}

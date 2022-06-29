@@ -24,13 +24,11 @@ public class MeliServiceImpl implements IMeliService {
 
 	@Override
 	public ResponseXmenDTO isMutant(RequestXmenDTO request) throws BusinessLayerException {
-		ResponseXmenDTO response = new ResponseXmenDTO();
-
 		this.bussinessValidations(request.getDna());
 		boolean isMutant = this.isMutant(Utils.listIntoMatrix(request.getDna()));
 		this.saveStats(isMutant);
 
-		return response;
+		return new ResponseXmenDTO(isMutant);
 	}
 
 	@Override
@@ -53,8 +51,7 @@ public class MeliServiceImpl implements IMeliService {
 	}
 
 	private boolean isMutant(String[][] matrix) {
-
-		return true;
+		return Utils.validateSequence(matrix);
 	}
 
 	private void saveStats(boolean isMutant) {
