@@ -4,8 +4,8 @@
 This project is to analyze the DNA and evaluate if it is mutant or human.
 
 ## Project specifications
-- ** SpringBoot:** 2.7.1
-- ** Java:** 11
+- **SpringBoot:** 2.7.1
+- **Java:** 11
 
 ## Methods
 It has 2 methods to use
