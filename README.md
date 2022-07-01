@@ -1,7 +1,7 @@
 # DNA Analyzer  - XMEN
 
 ## Introduction 
-This project is to analyze the DNA.
+This project is to analyze the DNA and evaluate if it is mutant or human.
 
 ## Methods
 It has 2 methods to use
