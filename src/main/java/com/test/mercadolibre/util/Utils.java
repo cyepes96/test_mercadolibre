@@ -42,10 +42,10 @@ public class Utils {
 		if (validateSequenceIn(Constantes.VERTICAL, matrix))
 			return true;
 
-		if (validateSequenceIn(Constantes.DIAGONALES_LEFT, matrix))
+		if (validateSequenceIn(Constantes.DIAGONAL_LEFT, matrix))
 			return true;
 
-		if (validateSequenceIn(Constantes.DIAGONALES_RIGHT, matrix))
+		if (validateSequenceIn(Constantes.DIAGONAL_RIGHT, matrix))
 			return true;
 
 		return false;
@@ -57,7 +57,7 @@ public class Utils {
 			return validateSequenceHorizontal(matrix);
 		case Constantes.VERTICAL:
 			return validateSequenceVertical(matrix);
-		case Constantes.DIAGONALES_LEFT:
+		case Constantes.DIAGONAL_LEFT:
 			return validateSequenceDiagonalLeft(matrix);
 		default:
 			return validateSequenceDiagonalRight(matrix);
@@ -101,23 +101,34 @@ public class Utils {
 	}
 
 	private static boolean validateSequenceDiagonalLeft(String[][] matrix) {
-		for (int i = 0; i < matrix.length; i++) {
-			String val = "";
-			String vals = "";
-			for (int j = 0; j < matrix.length; j++) {
-				for (int k = i; k >= 0; k--) {
-					val += "" + j + "," + k + "-";
-					vals += matrix[j][k];
-				}
+		for (int i = 0; i <= (matrix.length - Constantes.MIN_SEQUENCE_EQUALS); i++) {
+			int cont = 1;
+			for (int k = 1; k < Constantes.MIN_SIZE_MATRIX; k++) {
+				if (!matrix[i][i].equals(matrix[i + k][i + k]) || cont == Constantes.MIN_SEQUENCE_EQUALS)
+					break;
+
+				cont++;
 			}
-			// System.out.println(val);
-			// System.out.println(vals);
+			if (cont == Constantes.MIN_SEQUENCE_EQUALS)
+				return true;
 		}
 
 		return false;
 	}
 
 	private static boolean validateSequenceDiagonalRight(String[][] matrix) {
+		for (int i = 0; i <= (matrix.length - Constantes.MIN_SEQUENCE_EQUALS); i++) {
+			int cont = 1;
+			for (int k = 1; k < Constantes.MIN_SIZE_MATRIX; k++) {
+				if (!matrix[i][matrix.length - i - 1].equals(matrix[i + k][matrix.length - i - 1 - k])
+						|| cont == Constantes.MIN_SEQUENCE_EQUALS)
+					break;
+
+				cont++;
+			}
+			if (cont == Constantes.MIN_SEQUENCE_EQUALS)
+				return true;
+		}
 
 		return false;
 	}
