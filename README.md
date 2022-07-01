@@ -6,14 +6,14 @@ This project is to analyze the DNA.
 
 ## Methods
 It has 2 methods to use
-- stats: It show you the statistics of human and mutants.
-	HTTP Method: GET
-	URL: https://test-mercadolibre.azurewebsites.net/xmen/stats
+- stats: It show you the statistics of human and mutants.  
+	HTTP Method: GET  
+	URL: https://test-mercadolibre.azurewebsites.net/xmen/stats  
 
-- mutant: It say you if the DNA is a mutant or a human
-	HTTP Method: POST
-	URL: https://test-mercadolibre.azurewebsites.net/xmen/mutant
-	Body example: 
+- mutant: It say you if the DNA is a mutant or a human.  
+	HTTP Method: POST  
+	URL: https://test-mercadolibre.azurewebsites.net/xmen/mutant  
+	Body example:
 	{
 		"dna": [
 			"TTTTGT",
